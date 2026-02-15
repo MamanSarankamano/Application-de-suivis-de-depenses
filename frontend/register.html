@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Dépenses - Devenir Membre Elite | Bureau Financier</title>
+    <meta name="description"
+        content="Commencez votre voyage vers la maîtrise financière absolue. Rejoignez l'élite des gestionnaires avec Suivi Dépenses.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/logo-colors.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-sidebar">
+            <div class="auth-sidebar-content">
+                <img src="img/logo (1).jpg" alt="Suivi Dépenses" class="brand-logo-img" width="80" height="80" loading="eager">
+                <h2 class="auth-sidebar-title">Suivi Dépenses</h2>
+                <p class="auth-sidebar-text">L'avenir appartient à ceux qui préparent leur budget avec élégance.</p>
+            </div>
+        </div>
+
+        <main class="auth-content">
+            <div class="auth-card">
+                <header class="auth-header">
+                    <span class="auth-category">Inscription d'Élite</span>
+                    <h1 class="auth-title">Ouvrir votre Bureau</h1>
+                    <p class="auth-desc">Bâtissez les fondations de votre empire financier.</p>
+                </header>
+
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Nom d'utilisateur</label>
+                        <input type="text" id="username" class="form-input" required placeholder="Votre pseudo d'élite"
+                            autocomplete="username" aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Adresse Email Professionnelle</label>
+                        <input type="email" id="email" class="form-input" required placeholder="email@votre-banque.com"
+                            autocomplete="email" aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Mot de passe de Sécurité</label>
+                        <input type="password" id="password" class="form-input" required placeholder="••••••••"
+                            autocomplete="new-password" aria-required="true">
+                        <p class="form-hint">
+                            <i class="fas fa-info-circle" aria-hidden="true"></i> Minimum 8 caractères, incluant une <strong>majuscule</strong>, une <strong>minuscule</strong>, un <strong>chiffre</strong> et un <strong>symbole</strong>.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn-premium btn-full" id="registerBtn" aria-label="Créer mon compte">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i> Créer mon Bureau Financier
+                    </button>
+                </form>
+
+                <p class="auth-switch">
+                    Déjà membre de l'élite ? <a href="login.html" class="auth-switch-link" aria-label="Se connecter">Accéder à ma Session</a>
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('registerBtn');
+
+            btn.disabled = true;
+            btn.textContent = 'Création du Bureau...';
+            btn.setAttribute('aria-busy', 'true');
+
+            try {
+                await apiRequest('/api/auth/register', 'POST', { username, email, password });
+                showToast("Votre bureau financier a été créé avec succès !");
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            } catch (error) {
+                // apiRequest shows toast
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-user-plus"></i> Créer mon Bureau Financier';
+                btn.removeAttribute('aria-busy');
+            }
+        });
+    </script>
+</body>
+
+</html>

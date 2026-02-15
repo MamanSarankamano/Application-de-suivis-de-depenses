@@ -1,0 +1,20 @@
+/* App Footer - Cohérent avec le design system */
+.app-footer {
+    margin-top: 4rem;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-top: 1px solid var(--border-soft);
+    background: var(--bg-light);
+}
+
+.app-footer a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.app-footer a:hover {
+    text-decoration: underline;
+}

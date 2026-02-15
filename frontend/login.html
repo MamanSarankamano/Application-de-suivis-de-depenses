@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Suivi Dépenses | Accès Privé</title>
+    <meta name="description"
+        content="Accédez à votre espace de gestion financière Suivi Dépenses. Sécurité de niveau bancaire.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/logo-colors.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-sidebar">
+            <div class="auth-sidebar-content">
+                <img src="img/logo (1).jpg" alt="Suivi Dépenses" class="brand-logo-img" width="80" height="80" loading="eager">
+                <h2 class="auth-sidebar-title">Suivi Dépenses</h2>
+                <p class="auth-sidebar-text">Découvrez une sérénité financière absolue avec nos outils de précision.</p>
+            </div>
+        </div>
+
+        <main class="auth-content">
+            <div class="auth-card">
+                <header class="auth-header">
+                    <span class="auth-category">Accès Sécurisé</span>
+                    <h1 class="auth-title">Bon Retour</h1>
+                    <p class="auth-desc">Entrez vos identifiants pour continuer.</p>
+                </header>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Nom d'utilisateur</label>
+                        <input type="text" id="username" class="form-input" required placeholder="Votre pseudo"
+                            autocomplete="username" aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <a href="#" class="form-link" aria-label="Mot de passe oublié ?">Oublié ?</a>
+                        </div>
+                        <input type="password" id="password" class="form-input" required placeholder="••••••••"
+                            autocomplete="current-password" aria-required="true">
+                    </div>
+
+                    <button type="submit" class="btn-premium btn-full" id="loginBtn" aria-label="Accéder au Dashboard">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Accéder au Dashboard
+                    </button>
+                </form>
+
+                <p class="auth-switch">
+                    Nouveau ici ? <a href="register.html" class="auth-switch-link" aria-label="Créer un compte privé">Créer un compte privé</a>
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('loginBtn');
+
+            btn.disabled = true;
+            btn.textContent = 'Connexion...';
+            btn.setAttribute('aria-busy', 'true');
+
+            try {
+                const response = await apiRequest('/api/auth/login', 'POST', { username, password });
+                localStorage.setItem('access_token', response.access_token);
+                localStorage.setItem('user', JSON.stringify(response.user));
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                // apiRequest already shows a toast for errors
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Accéder au Dashboard';
+                btn.removeAttribute('aria-busy');
+            }
+        });
+    </script>
+</body>
+
+</html>

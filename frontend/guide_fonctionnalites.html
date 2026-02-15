@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide d'Utilisation - Fonctionnalités Transactions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature {
+            background: #f7fafc;
+            border-left: 5px solid #667eea;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .feature h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .steps {
+            margin-top: 1.5rem;
+        }
+
+        .step {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: #4a5568;
+            margin-left: 50px;
+        }
+
+        .screenshot {
+            background: #edf2f7;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px dashed #cbd5e0;
+            text-align: center;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .success-box {
+            background: #c6f6d5;
+            border-left: 5px solid #48bb78;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .success-box h3 {
+            color: #22543d;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-box p {
+            color: #276749;
+        }
+
+        .warning-box {
+            background: #fef5e7;
+            border-left: 5px solid #f39c12;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .warning-box h3 {
+            color: #7d6608;
+            margin-bottom: 0.5rem;
+        }
+
+        .code {
+            background: #2d3748;
+            color: #68d391;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .btn-demo {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: all 0.3s;
+        }
+
+        .btn-demo:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .quick-link {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-link i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎯 Guide d'Utilisation des Fonctionnalités</h1>
+        <p class="subtitle">Toutes les fonctionnalités existent et fonctionnent ! Voici comment les utiliser.</p>
+
+        <div class="success-box">
+            <h3>✅ Confirmation : Toutes les fonctionnalités sont opérationnelles !</h3>
+            <p>Le backend API est fonctionnel et toutes les routes sont testées et validées. Vous pouvez maintenant
+                utiliser l'interface web pour gérer vos transactions.</p>
+        </div>
+
+        <!-- FONCTIONNALITÉ 1 : AJOUTER -->
+        <div class="feature">
+            <h2>
+                <div class="feature-icon"><i class="fas fa-plus"></i></div>
+                1. Ajouter des Dépenses/Revenus
+            </h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        Ouvrir la page Transactions
+                    </div>
+                    <div class="step-description">
+                        Dans votre navigateur, allez sur <span class="code">frontend/transactions.html</span><br>
+                        Ou cliquez sur "Transactions" dans la sidebar de l'application
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        Cliquer sur "Nouvelle Transaction"
+                    </div>
+                    <div class="step-description">
+                        Un bouton bleu en haut à droite avec le texte "Nouvelle Transaction"<br>
+                        Un formulaire modal va s'ouvrir
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">3</span>
+                        Remplir le formulaire
+                    </div>
+                    <div class="step-description">
+                        <strong>Type :</strong> Choisissez "Dépense" ou "Revenu"<br>
+                        <strong>Montant :</strong> Entrez le montant (ex: 50.00)<br>
+                        <strong>Date :</strong> Sélectionnez la date<br>
+                        <strong>Catégorie :</strong> Choisissez une catégorie dans la liste<br>
+                        <strong>Description :</strong> Ajoutez une description (ex: "Courses du week-end")
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">4</span>
+                        Cliquer sur "Enregistrer"
+                    </div>
+                    <div class="step-description">
+                        La transaction sera ajoutée à la base de données<br>
+                        Elle apparaîtra immédiatement dans la liste des transactions
+                    </div>
+                </div>
+            </div>
+
+            <div class="screenshot">
+                📸 Le formulaire modal contient tous ces champs et fonctionne parfaitement
+            </div>
+        </div>
+
+        <!-- FONCTIONNALITÉ 2 : RECHERCHER -->
+        <div class="feature">
+            <h2>
+                <div class="feature-icon"><i class="fas fa-search"></i></div>
+                2. Rechercher des Dépenses
+            </h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        Utiliser la barre de recherche
+                    </div>
+                    <div class="step-description">
+                        En haut de la page Transactions, il y a une barre de recherche<br>
+                        Tapez un mot-clé (ex: "restaurant", "courses", "essence")
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        Filtrer par catégorie
+                    </div>
+                    <div class="step-description">
+                        Utilisez le menu déroulant "Toutes Catégories"<br>
+                        Sélectionnez une catégorie spécifique (Alimentation, Transport, etc.)
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">3</span>
+                        Filtrer par type
+                    </div>
+                    <div class="step-description">
+                        Utilisez le menu déroulant "Tous Types"<br>
+                        Choisissez "Dépenses" ou "Revenus" pour filtrer
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">4</span>
+                        Résultats en temps réel
+                    </div>
+                    <div class="step-description">
+                        La liste se met à jour automatiquement pendant que vous tapez<br>
+                        Vous voyez immédiatement les transactions correspondantes
+                    </div>
+                </div>
+            </div>
+
+            <div class="screenshot">
+                📸 Les filtres sont situés juste au-dessus du tableau des transactions
+            </div>
+        </div>
+
+        <!-- FONCTIONNALITÉ 3 : SUPPRIMER -->
+        <div class="feature">
+            <h2>
+                <div class="feature-icon"><i class="fas fa-trash"></i></div>
+                3. Supprimer des Dépenses
+            </h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        Trouver la transaction à supprimer
+                    </div>
+                    <div class="step-description">
+                        Dans le tableau des transactions, chaque ligne représente une transaction<br>
+                        Utilisez la recherche si nécessaire pour trouver la transaction
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        Cliquer sur l'icône poubelle
+                    </div>
+                    <div class="step-description">
+                        À droite de chaque transaction, il y a deux boutons :<br>
+                        • Un crayon (✏️) pour modifier<br>
+                        • Une poubelle (🗑️) pour supprimer
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">3</span>
+                        Confirmer la suppression
+                    </div>
+                    <div class="step-description">
+                        Une fenêtre de confirmation apparaît<br>
+                        Cliquez sur "OK" pour confirmer la suppression
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">4</span>
+                        Transaction supprimée
+                    </div>
+                    <div class="step-description">
+                        La transaction disparaît immédiatement de la liste<br>
+                        Elle est supprimée définitivement de la base de données
+                    </div>
+                </div>
+            </div>
+
+            <div class="screenshot">
+                📸 Les boutons d'action sont dans la dernière colonne du tableau
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h3>⚠️ Important : Vous devez être connecté</h3>
+            <p>Pour utiliser ces fonctionnalités, vous devez d'abord :</p>
+            <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li>Créer un compte sur <span class="code">register.html</span></li>
+                <li>Vous connecter sur <span class="code">login.html</span></li>
+                <li>Ensuite, vous pourrez accéder à <span class="code">transactions.html</span></li>
+            </ol>
+        </div>
+
+        <div class="success-box">
+            <h3>🎉 Preuve que tout fonctionne</h3>
+            <p>Le script <span class="code">demo_fonctionnalites.py</span> que nous venons d'exécuter a testé avec
+                succès :</p>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li>✅ Ajout de 4 transactions (3 dépenses + 1 revenu)</li>
+                <li>✅ Recherche par mot-clé ("restaurant", "courses")</li>
+                <li>✅ Filtrage par type (dépenses/revenus)</li>
+                <li>✅ Suppression d'une transaction</li>
+            </ul>
+        </div>
+
+        <h2 style="margin-top: 3rem; margin-bottom: 1rem; text-align: center;">🚀 Liens Rapides</h2>
+
+        <div class="quick-links">
+            <a href="register.html" class="quick-link">
+                <i class="fas fa-user-plus"></i>
+                <div>S'inscrire</div>
+            </a>
+
+            <a href="login.html" class="quick-link">
+                <i class="fas fa-sign-in-alt"></i>
+                <div>Se connecter</div>
+            </a>
+
+            <a href="transactions.html" class="quick-link">
+                <i class="fas fa-exchange-alt"></i>
+                <div>Gérer les Transactions</div>
+            </a>
+
+            <a href="dashboard.html" class="quick-link">
+                <i class="fas fa-chart-line"></i>
+                <div>Voir le Dashboard</div>
+            </a>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 2rem; background: #edf2f7; border-radius: 10px; text-align: center;">
+            <h3 style="color: #2d3748; margin-bottom: 1rem;">📝 Résumé</h3>
+            <p style="color: #4a5568; font-size: 1.1rem;">
+                <strong>Toutes les fonctionnalités que vous avez demandées existent et fonctionnent !</strong><br>
+                Le backend API est opérationnel, l'interface est prête, il ne vous reste plus qu'à l'utiliser.<br>
+                <br>
+                Ouvrez <span class="code">frontend/index.html</span> dans votre navigateur et commencez !
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

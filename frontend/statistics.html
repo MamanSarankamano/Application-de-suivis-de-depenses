@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Dépenses - Analyses & Statistiques | Grandeur Financière</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/logo-colors.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/empty-states.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <meta name="description"
+        content="Visualisez vos flux financiers avec une précision chirurgicale. Analyse de répartition, tendances mensuelles et intelligence d'épargne avec Suivi Dépenses.">
+    <meta name="keywords" content="statistiques finance, analyse budget, maïtrisé prestige, graphiques épargne">
+    <meta property="og:title" content="Suivi Dépenses - Analyses de Grandeur">
+    <meta property="og:description" content="Une intelligence financière de haut niveau conçue pour l'élite.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Elite -->
+        <aside class="sidebar" aria-label="Navigation principale">
+            <div class="sidebar-logo">
+                <img src="img/logo (1).jpg" alt="Suivi Dépenses" class="brand-logo-img" width="38" height="38"
+                    loading="eager">
+                <div class="sidebar-logo-text">Suivi Dépenses</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Tableau de Bord</span>
+                </a>
+                <a href="transactions.html" class="sidebar-nav-link">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="statistics.html" class="sidebar-nav-link active">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Statistiques</span>
+                </a>
+                <a href="categories.html" class="sidebar-nav-link">
+                    <i class="fas fa-th-large"></i>
+                    <span>Catégories</span>
+                </a>
+                <a href="settings.html" class="sidebar-nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-block">
+                    <div class="sidebar-footer-block-title"><i class="fas fa-shield-alt"
+                            style="color: var(--color-emerald);" aria-hidden="true"></i><span>Sécurité Active</span>
+                    </div>
+                    <p>Chiffrement AES-256 bits et audit de sécurité conforme RGPD.</p>
+                </div>
+                <button type="button" onclick="logout()" class="sidebar-btn-logout" aria-label="Se déconnecter"><i
+                        class="fas fa-sign-out-alt" aria-hidden="true"></i><span>Déconnexion</span></button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div class="page-title-box">
+                    <div class="page-title-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+                    <div>
+                        <h1 class="page-title">Analyses Avancées</h1>
+                        <p class="page-subtitle">Visualisez vos tendances et optimisez votre budget.</p>
+                    </div>
+                </div>
+                <div class="header-icons">
+                    <div class="header-badge"><i class="fas fa-shield-check" aria-hidden="true"></i> PROTÉGÉ</div>
+                    <div class="user-profile">
+                        <div id="userNameDisplay" class="user-name">
+                            Chargement...</div>
+                        <img src="https://ui-avatars.com/api/?name=User&background=06B6D4&color=fff"
+                            class="user-avatar-img" id="userAvatarImg" width="32" height="32" alt="">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-padding">
+                <div id="demoBannerContainer"></div>
+                <!-- Trend Analysis Card -->
+                <div class="card" role="region" aria-label="Analyse de flux">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">Flux de Trésorerie Mensuelle</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Évolution de vos
+                                revenus nets après dépenses</p>
+                        </div>
+                    </div>
+                    <div style="height: 400px; padding-top: 1rem;" class="skeleton-container">
+                        <div id="loadingChart" class="skeleton" style="height: 100%; width: 100%;"></div>
+                        <canvas id="detailedChart" style="display: none;"></canvas>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem;">
+                    <!-- Distribution Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Répartition par Poste</h2>
+                        </div>
+                        <div
+                            style="height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                            <canvas id="pieChart"></canvas>
+                            <div style="position: absolute; text-align: center; pointer-events: none;">
+                                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">DÉPENSES
+                                    TOTALES</div>
+                                <div id="totalExpenseDisplay"
+                                    style="font-size: 1.5rem; font-weight: 800; color: var(--text-dark);">0 GNF</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Insights -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Top Catégories</h2>
+                        </div>
+                        <div id="categoryInsights" style="display: flex; flex-direction: column; gap: 1.75rem;">
+                            <!-- JS content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/icons.js"></script>
+    <script src="js/currency.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/demo-data.js"></script>
+    <script src="js/api-demo.js"></script>
+    <script src="js/init-demo.js"></script>
+    <script src="js/empty-state.js"></script>
+    <script>
+        checkAuth();
+
+        let detailedChart, pieChart;
+
+        async function loadStats() {
+            const request = (window.apiRequestWithDemo || apiRequest).bind(window);
+            const loadingEl = document.getElementById('loadingChart');
+            const canvasEl = document.getElementById('detailedChart');
+            try {
+                const [monthlyStats, catStats] = await Promise.all([
+                    request('/api/transactions/stats/monthly'),
+                    request('/api/transactions/stats/by-category')
+                ]);
+                if (loadingEl) loadingEl.style.display = 'none';
+                if (canvasEl) canvasEl.style.display = 'block';
+
+                if (monthlyStats && monthlyStats.length) {
+                    renderDetailedChart(monthlyStats);
+                } else {
+                    const region = document.querySelector('[role="region"][aria-label="Analyse de flux"]');
+                    const skeleton = region ? region.querySelector('.skeleton-container') : null;
+                    if (skeleton) skeleton.innerHTML = '<div class="empty-state"><h3 class="empty-state-title">Pas encore de données</h3><p class="empty-state-text">Vos graphiques apparaîtront ici une fois des transactions enregistrées.</p><a href="transactions.html" class="btn-premium">Ajouter des transactions</a></div>';
+                }
+                if (catStats && catStats.length) {
+                    renderPieChart(catStats);
+                    renderInsights(catStats);
+                    const totalExp = catStats.reduce((a, c) => a + c.value, 0);
+                    const totalExpEl = document.getElementById('totalExpenseDisplay');
+                    if (totalExpEl) totalExpEl.textContent = formatCurrency(totalExp);
+                } else {
+                    const insightsEl = document.getElementById('categoryInsights');
+                    if (insightsEl) insightsEl.innerHTML = '<p class="empty-state-text">Aucune répartition pour le moment.</p>';
+                }
+
+                const user = getCurrentUser();
+                if (user) {
+                    const nameEl = document.getElementById('userNameDisplay');
+                    const avatarEl = document.getElementById('userAvatarImg');
+                    if (nameEl) nameEl.textContent = user.username;
+                    if (avatarEl) avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username)}&background=06B6D4&color=fff`;
+                }
+
+                if (window.renderDemoBanner) renderDemoBanner('demoBannerContainer');
+            } catch (err) {
+                console.error("Error loading stats:", err);
+                // En cas d'erreur, charger les données de démo
+                try {
+                    if (window.DEMO_DATA) {
+                        const monthlyStats = await window.DEMO_DATA.getDemoMonthly();
+                        const catStats = await window.DEMO_DATA.getDemoByCategory();
+                        if (loadingEl) loadingEl.style.display = 'none';
+                        if (canvasEl) canvasEl.style.display = 'block';
+                        if (monthlyStats && monthlyStats.length) renderDetailedChart(monthlyStats);
+                        if (catStats && catStats.length) {
+                            renderPieChart(catStats);
+                            renderInsights(catStats);
+                            const totalExp = catStats.reduce((a, c) => a + c.value, 0);
+                            const totalExpEl = document.getElementById('totalExpenseDisplay');
+                            if (totalExpEl) totalExpEl.textContent = formatCurrency(totalExp);
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error loading demo stats:', e);
+                }
+                if (window.renderDemoBanner) renderDemoBanner('demoBannerContainer');
+            }
+        }
+
+        function renderDetailedChart(data) {
+            const ctx = document.getElementById('detailedChart').getContext('2d');
+
+            // Dégradé riche et profond (Vertical)
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(37, 99, 235, 0.5)');   // Bleu intense en haut
+            gradient.addColorStop(0.4, 'rgba(37, 99, 235, 0.15)'); // Transition douce
+            gradient.addColorStop(1, 'rgba(37, 99, 235, 0)');     // Transparent en bas
+
+            // Dégradé pour la ligne elle-même (Horizontal - effet néon)
+            const borderGradient = ctx.createLinearGradient(0, 0, ctx.canvas.width, 0);
+            borderGradient.addColorStop(0, '#2563EB');
+            borderGradient.addColorStop(0.5, '#60A5FA'); // Plus clair au milieu
+            borderGradient.addColorStop(1, '#2563EB');
+
+            if (detailedChart) detailedChart.destroy();
+
+            detailedChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => d.month),
+                    datasets: [{
+                        label: 'Flux Net',
+                        data: data.map(d => d.income - d.expense),
+                        borderColor: borderGradient, // Ligne dégradée
+                        backgroundColor: gradient,
+                        fill: true,
+                        tension: 0.5, // Courbe très fluide (organique)
+                        borderWidth: 4,
+
+                        // Points
+                        pointRadius: 6,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#2563EB',
+                        pointBorderWidth: 3,
+
+                        // Effets au survol
+                        pointHoverRadius: 12, // Gros zoom au survol
+                        pointHoverBackgroundColor: '#2563EB',
+                        pointHoverBorderColor: '#fff',
+                        pointHoverBorderWidth: 4,
+
+                        // Ombre portée sur la ligne (Effet Glow manuel via API Canvas si supporté, sinon simulé ici)
+                        borderJoinStyle: 'round',
+                        borderCapStyle: 'round'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    // Animation d'entrée progressive (effet "écriture")
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart',
+                        x: {
+                            from: -500 // Arrive de la gauche
+                        },
+                        y: {
+                            from: 500 // Monte légèrement
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false, // L'infobulle suit la souris même entre les points
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)', // Fond sombre semi-transparent
+                            titleFont: { family: 'Outfit', size: 14, weight: '700' },
+                            bodyFont: { family: 'Outfit', size: 14 },
+                            padding: 16,
+                            cornerRadius: 16,
+                            displayColors: false, // Pas de carré de couleur
+                            callbacks: {
+                                label: context => {
+                                    const value = context.parsed.y;
+                                    const formatted = formatCurrency(value);
+                                    return `Flux Net : ${formatted}`;
+                                },
+                                title: tooltipItems => {
+                                    return tooltipItems[0].label.toUpperCase();
+                                }
+                            },
+                            // Animation de l'infobulle
+                            animation: {
+                                duration: 200
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                color: 'rgba(148, 163, 184, 0.1)', // Grille très subtile
+                                borderDash: [5, 5], // Pointillés
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#94A3B8',
+                                font: { family: 'Outfit', size: 11, weight: '600' },
+                                padding: 10,
+                                callback: value => formatCurrency(value, false) + ' ' + CURRENCY_CONFIG.symbol
+                            },
+                            border: { display: false } // Pas de ligne d'axe Y
+                        },
+                        x: {
+                            grid: { display: false }, // Pas de grille verticale
+                            ticks: {
+                                color: '#64748B',
+                                font: { family: 'Outfit', size: 12, weight: '600' },
+                                padding: 10
+                            },
+                            border: { display: false } // Pas de ligne d'axe X
+                        }
+                    },
+                    // Ajout d'ombres via hook (Trick avancé Chart.js)
+                    layout: {
+                        padding: { top: 20, right: 20, bottom: 0, left: 10 }
+                    }
+                },
+                plugins: [{
+                    // Plugin pour ajouter une ombre portée (Glow Effect) sur la ligne
+                    beforeDraw: (chart) => {
+                        const ctx = chart.ctx;
+                        ctx.save();
+                        ctx.shadowColor = 'rgba(37, 99, 235, 0.5)';
+                        ctx.shadowBlur = 20; // Flou intense pour l'effet néon
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 10;
+                    },
+                    afterDraw: (chart) => {
+                        chart.ctx.restore();
+                    }
+                }]
+            });
+        }
+
+        function renderPieChart(data) {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            if (pieChart) pieChart.destroy();
+
+            pieChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.map(d => d.name),
+                    datasets: [{
+                        data: data.map(d => d.value),
+                        backgroundColor: data.map(d => d.color || '#3B82F6'),
+                        borderWidth: 0, // Pas de bordure pour un look plus clean
+                        hoverOffset: 25, // Gros pop au survol
+                        borderRadius: 20, // Bords très arrondis
+                        spacing: 5, // Espace entre les segments
+                        // Ajout d'ombres portées via plugin custom ou configuration si supporté (ici configuration standard poussée)
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%', // Donut fin et élégant
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true,
+                        duration: 1500,
+                        easing: 'easeOutElastic' // Effet rebond à l'entrée
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 16,
+                            titleFont: { family: 'Outfit', size: 14, weight: '700' },
+                            bodyFont: { family: 'Outfit', size: 14 },
+                            cornerRadius: 12,
+                            displayColors: true,
+                            boxPadding: 6,
+                            callbacks: {
+                                label: context => {
+                                    const val = formatCurrency(context.parsed);
+                                    return ` ${context.label}: ${val}`;
+                                }
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: 20
+                    }
+                },
+                plugins: [{
+                    beforeDraw: (chart) => {
+                        const ctx = chart.ctx;
+                        ctx.save();
+                        // Ombre globale subtile sous le chart
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+                        ctx.shadowBlur = 20;
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 10;
+                        const { width, height, top, left } = chart.chartArea;
+                    },
+                    afterDraw: (chart) => {
+                        chart.ctx.restore();
+                    }
+                }]
+            });
+        }
+
+        function renderInsights(data) {
+            const container = document.getElementById('categoryInsights');
+            const total = data.reduce((acc, curr) => acc + curr.value, 0);
+
+            // On génère le HTML
+            container.innerHTML = data.slice(0, 6).map((cat, index) => {
+                const percentage = total > 0 ? ((cat.value / total) * 100).toFixed(0) : 0;
+                // Animation delay staggered
+                const delay = index * 100;
+                return `
+                    <div class="category-augment-item" style="display: flex; flex-direction: column; gap: 8px; opacity: 0; animation: slideInRight 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: ${delay}ms;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 12px; height: 12px; border-radius: 4px; background: ${cat.color}; box-shadow: 0 0 10px ${cat.color}66;"></div>
+                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); letter-spacing: -0.01em;">${cat.name}</span>
+                            </div>
+                            <div style="font-weight: 800; color: var(--text-dark); font-size: 0.9rem;">${percentage}%</div>
+                        </div>
+                        <div style="background: #F1F5F9; height: 10px; border-radius: 10px; overflow: hidden; position: relative;">
+                            <!-- La barre commence à width: 0 et s'animera via JS -->
+                            <div class="progress-bar-fill" 
+                                 data-width="${percentage}%" 
+                                 style="background: linear-gradient(90deg, ${cat.color}, ${adjustColorBrightness(cat.color, 20)}); width: 0%; height: 100%; border-radius: 10px; opacity: 1; transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1); box-shadow: 0 0 10px ${cat.color}44;">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Déclencher l'animation de largeur après un court délai pour que la transition CSS s'active
+            setTimeout(() => {
+                const bars = container.querySelectorAll('.progress-bar-fill');
+                bars.forEach((bar, i) => {
+                    setTimeout(() => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    }, i * 100); // Petit décalage aussi pour le remplissage
+                });
+            }, 100);
+        }
+
+        // Helper pour éclaircir une couleur (pour le gradient)
+        function adjustColorBrightness(col, amt) {
+            let usePound = false;
+            if (col[0] == "#") {
+                col = col.slice(1);
+                usePound = true;
+            }
+            let num = parseInt(col, 16);
+            let r = (num >> 16) + amt;
+            if (r > 255) r = 255; else if (r < 0) r = 0;
+            let b = ((num >> 8) & 0x00FF) + amt;
+            if (b > 255) b = 255; else if (b < 0) b = 0;
+            let g = (num & 0x0000FF) + amt;
+            if (g > 255) g = 255; else if (g < 0) g = 0;
+            return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+        }
+
+        loadStats();
+
+        // Recharger quand les données sont mises à jour
+        window.addEventListener('suivi-data-updated', () => {
+            setTimeout(() => loadStats(), 500);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,441 @@
+/**
+ * Styles pour les icônes de catégories et d'actions
+ * Conforme au cahier des charges - Charte graphique
+ */
+
+/* ========================================
+   ICÔNES DE CATÉGORIES
+   ======================================== */
+
+.category-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Tailles des icônes */
+.category-icon.icon-sm {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+}
+
+.category-icon.icon-md {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+}
+
+.category-icon.icon-lg {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+}
+
+/* Animation au survol */
+.category-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1);
+}
+
+.category-icon i {
+    transition: transform 0.2s ease;
+}
+
+.category-icon:hover i {
+    transform: scale(1.1);
+}
+
+/* ========================================
+   ICÔNES D'ACTIONS
+   ======================================== */
+
+.action-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
+.action-icon:hover {
+    background-color: rgba(6, 182, 212, 0.1);
+    transform: translateY(-2px);
+}
+
+.action-icon i {
+    font-size: 18px;
+    color: var(--color-navy);
+}
+
+/* Boutons d'action spécifiques */
+.action-icon.add {
+    background-color: var(--color-cyan);
+    color: white;
+}
+
+.action-icon.add i {
+    color: white;
+}
+
+.action-icon.add:hover {
+    background-color: #0891B2;
+}
+
+/* ... other changes ... */
+.category-option:hover {
+    border-color: var(--color-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1);
+}
+
+.category-option.selected {
+    border-color: var(--color-cyan);
+    background-color: rgba(6, 182, 212, 0.05);
+}
+
+/* Navigation overrides */
+.sidebar-nav a.active {
+    background-color: var(--color-cyan);
+}
+
+.action-icon.edit {
+    background-color: #F59E0B15;
+}
+
+.action-icon.edit i {
+    color: #F59E0B;
+}
+
+.action-icon.edit:hover {
+    background-color: #F59E0B25;
+}
+
+.action-icon.delete {
+    background-color: #DC262615;
+}
+
+.action-icon.delete i {
+    color: #DC2626;
+}
+
+.action-icon.delete:hover {
+    background-color: #DC262625;
+}
+
+/* ========================================
+   BADGES AVEC ICÔNES
+   ======================================== */
+
+.badge-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.badge-with-icon i {
+    font-size: 16px;
+}
+
+.badge-revenue {
+    background-color: #16A34A15;
+    color: #16A34A;
+}
+
+.badge-expense {
+    background-color: #DC262615;
+    color: #DC2626;
+}
+
+/* ========================================
+   LISTE DE TRANSACTIONS AVEC ICÔNES
+   ======================================== */
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+    border: 1px solid #E5E7EB;
+}
+
+.transaction-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.transaction-details {
+    flex: 1;
+}
+
+.transaction-details h4 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+}
+
+.transaction-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.transaction-amount {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.transaction-amount.revenue {
+    color: #16A34A;
+}
+
+.transaction-amount.expense {
+    color: #DC2626;
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.transaction-item:hover .transaction-actions {
+    opacity: 1;
+}
+
+/* ========================================
+   SÉLECTEUR DE CATÉGORIE
+   ======================================== */
+
+.category-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.category-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid #E5E7EB;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.category-option:hover {
+    border-color: var(--color-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1);
+}
+
+.category-option.selected {
+    border-color: var(--color-cyan);
+    background-color: rgba(6, 182, 212, 0.1);
+}
+
+.category-option-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    text-align: center;
+}
+
+/* ========================================
+   PALETTE DE COULEURS
+   ======================================== */
+
+.color-palette {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+    border-color: #374151;
+}
+
+.color-option.selected {
+    border-color: var(--color-navy);
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.2);
+}
+
+.color-option.selected::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   ÉTATS VIDES
+   ======================================== */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.empty-state-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.empty-state-icon i {
+    font-size: 40px;
+    color: #9CA3AF;
+}
+
+.empty-state-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.empty-state-description {
+    font-size: 14px;
+    color: #6B7280;
+    margin-bottom: 24px;
+    max-width: 400px;
+}
+
+/* ========================================
+   ICÔNES DE NAVIGATION
+   ======================================== */
+
+.nav-icon {
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    margin: 4px 12px;
+}
+
+.sidebar-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.sidebar-nav a.active {
+    background-color: var(--color-cyan);
+}
+
+.sidebar-nav a i {
+    width: 24px;
+    text-align: center;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .category-selector {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .category-icon.icon-lg {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+    }
+
+    .transaction-item {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .transaction-actions {
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.icon-pulse {
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.icon-spin {
+    animation: iconSpin 1s linear infinite;
+}

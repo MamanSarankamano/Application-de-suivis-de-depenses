@@ -1,0 +1,336 @@
+/**
+ * Landing Page - Suivi Dépenses
+ * Styles dédiés à la page d'accueil (index.html).
+ * Cohérent avec design-system et style.css.
+ */
+
+.lp-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #FFF7ED 0%, var(--color-pearl) 100%);
+    overflow-x: hidden;
+    position: relative;
+}
+
+.lp-nav {
+    padding: 1.5rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-soft);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.lp-nav-actions {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.lp-nav-link {
+    text-decoration: none;
+    color: var(--color-navy);
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.lp-hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 8rem 10%;
+    gap: 6rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.lp-hero-content {
+    flex: 1.2;
+}
+
+.lp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    color: var(--color-cyan);
+    border-radius: var(--radius-full);
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-soft);
+}
+
+.lp-hero-title {
+    font-size: clamp(3.5rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--color-navy);
+    margin-bottom: 2rem;
+    letter-spacing: -0.04em;
+}
+
+.lp-hero-title span {
+    background: var(--grad-cyan);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.lp-hero-text {
+    font-size: 1.4rem;
+    color: var(--text-main);
+    margin-bottom: 4rem;
+    max-width: 600px;
+    line-height: 1.7;
+    opacity: 0.95;
+}
+
+.lp-hero-cta {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.lp-hero-cta .btn-premium {
+    border-radius: var(--radius-full);
+    padding: 1.25rem 3.5rem;
+    font-size: 1.15rem;
+}
+
+.lp-social-proof {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.lp-avatars {
+    display: flex;
+    border-radius: 50%;
+    padding: 4px;
+    background: white;
+    box-shadow: var(--shadow-soft);
+}
+
+.lp-avatars img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-left: -15px;
+    object-fit: cover;
+}
+
+.lp-avatars img:first-child {
+    margin-left: 0;
+}
+
+.lp-social-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.lp-social-text strong {
+    color: var(--color-cyan);
+}
+
+.lp-hero-image-container {
+    flex: 1;
+    position: relative;
+}
+
+.lp-hero-image-wrapper {
+    position: relative;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 56px;
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
+}
+
+.lp-hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 36px;
+    display: block;
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+.lp-floating-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: var(--glass-blur);
+    padding: 2rem;
+    border-radius: 32px;
+    box-shadow: 0 40px 80px -15px rgba(15, 23, 42, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid white;
+    z-index: 10;
+}
+
+.lp-card-1 {
+    top: 10%;
+    left: -5rem;
+}
+
+.lp-card-2 {
+    bottom: 10%;
+    right: -4rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .lp-card-1 {
+        animation: lp-float 5s ease-in-out infinite;
+    }
+    .lp-card-2 {
+        animation: lp-float 5s ease-in-out infinite reverse;
+    }
+}
+
+@keyframes lp-float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-30px) rotate(2deg); }
+}
+
+.lp-floating-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.lp-floating-card-icon.emerald {
+    background: #ECFDF5;
+    color: var(--color-emerald);
+}
+
+.lp-floating-card-icon.cyan {
+    background: #E0F2FE;
+    color: var(--color-cyan);
+}
+
+.lp-floating-card-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.lp-floating-card-value {
+    font-weight: 900;
+    color: var(--color-navy);
+    font-size: 1.2rem;
+}
+
+.lp-features {
+    padding: 12rem 10%;
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+
+.lp-feature-card {
+    padding: 4rem 3rem;
+    border-radius: 40px;
+    background: var(--color-pearl);
+    border: 1px solid var(--border-soft);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.lp-feature-card:hover {
+    background: white;
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-premium);
+    border-color: var(--color-cyan);
+}
+
+.lp-feature-icon {
+    width: 72px;
+    height: 72px;
+    background: var(--grad-cyan);
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 15px 30px rgba(6, 182, 212, 0.3);
+}
+
+.lp-feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color-navy);
+    margin-bottom: 1.25rem;
+}
+
+.lp-feature-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.lp-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/image.png');
+    background-size: cover;
+    opacity: 0.03;
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .lp-hero {
+        flex-direction: column;
+        padding: 4rem 5%;
+        gap: 3rem;
+    }
+    .lp-features {
+        grid-template-columns: 1fr;
+        padding: 6rem 5%;
+    }
+}
+
+/* Page d'accueil : pas de fond app (image fixe) */
+body:has(.lp-container) {
+    background: var(--color-pearl);
+    background-image: none;
+}
+
+body:has(.lp-container)::before {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .lp-nav {
+        padding: 1rem 5%;
+    }
+    .lp-nav-actions {
+        gap: 1.5rem;
+    }
+    .lp-hero-title {
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+    }
+    .lp-floating-card {
+        display: none;
+    }
+}

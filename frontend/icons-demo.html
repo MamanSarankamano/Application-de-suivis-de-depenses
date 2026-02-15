@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemple d'Intégration des Icônes - Suivi Dépenses</title>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles personnalisés -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/icons.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+            padding: 2rem;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .demo-item {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+        }
+
+        .demo-label {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="font-size: 2.5rem; font-weight: 700; color: #1F2937; margin-bottom: 2rem;">
+            <i class="fas fa-palette" style="color: #3B82F6;"></i>
+            Exemples d'Intégration des Icônes
+        </h1>
+
+        <!-- Section 1: Icônes de Catégories -->
+        <div class="demo-section">
+            <h2 class="demo-title">
+                <i class="fas fa-tags"></i> Icônes de Catégories de Dépenses
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #16A34A15; margin: 0 auto;">
+                        <i class="fas fa-shopping-cart" style="color: #16A34A;"></i>
+                    </div>
+                    <div class="demo-label">Alimentaire</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #3B82F615; margin: 0 auto;">
+                        <i class="fas fa-car" style="color: #3B82F6;"></i>
+                    </div>
+                    <div class="demo-label">Transport</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #F59E0B15; margin: 0 auto;">
+                        <i class="fas fa-home" style="color: #F59E0B;"></i>
+                    </div>
+                    <div class="demo-label">Logement</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #9333EA15; margin: 0 auto;">
+                        <i class="fas fa-gamepad" style="color: #9333EA;"></i>
+                    </div>
+                    <div class="demo-label">Divertissement</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #6B728015; margin: 0 auto;">
+                        <i class="fas fa-ellipsis-h" style="color: #6B7280;"></i>
+                    </div>
+                    <div class="demo-label">Autres</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Icônes de Revenus -->
+        <div class="demo-section">
+            <h2 class="demo-title">
+                <i class="fas fa-coins"></i> Icônes de Catégories de Revenus
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #16A34A15; margin: 0 auto;">
+                        <i class="fas fa-money-bill-wave" style="color: #16A34A;"></i>
+                    </div>
+                    <div class="demo-label">Salaire</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #16A34A15; margin: 0 auto;">
+                        <i class="fas fa-hand-holding-usd" style="color: #16A34A;"></i>
+                    </div>
+                    <div class="demo-label">Aide</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="category-icon icon-md" style="background-color: #05966915; margin: 0 auto;">
+                        <i class="fas fa-briefcase" style="color: #059669;"></i>
+                    </div>
+                    <div class="demo-label">Business</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Icônes d'Actions -->
+        <div class="demo-section">
+            <h2 class="demo-title">
+                <i class="fas fa-bolt"></i> Icônes d'Actions
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="action-icon add" style="margin: 0 auto;">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="demo-label">Ajouter</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="action-icon edit" style="margin: 0 auto;">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="demo-label">Modifier</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="action-icon delete" style="margin: 0 auto;">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="demo-label">Supprimer</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="action-icon" style="margin: 0 auto;">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <div class="demo-label">Filtrer</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="action-icon" style="margin: 0 auto;">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="demo-label">Exporter</div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="action-icon" style="margin: 0 auto;">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="demo-label">Rechercher</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Exemple de Transaction -->
+        <div class="demo-section">
+            <h2 class="demo-title">
+                <i class="fas fa-receipt"></i> Exemple de Liste de Transactions
+            </h2>
+
+            <div class="transaction-item">
+                <div class="category-icon icon-md" style="background-color: #16A34A15;">
+                    <i class="fas fa-shopping-cart" style="color: #16A34A;"></i>
+                </div>
+                <div class="transaction-details">
+                    <h4>Courses du mois</h4>
+                    <p>Alimentaire • 15 Jan 2026</p>
+                </div>
+                <div class="transaction-amount expense">-125.50 €</div>
+                <div class="transaction-actions">
+                    <div class="action-icon edit">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="action-icon delete">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transaction-item">
+                <div class="category-icon icon-md" style="background-color: #3B82F615;">
+                    <i class="fas fa-car" style="color: #3B82F6;"></i>
+                </div>
+                <div class="transaction-details">
+                    <h4>Essence</h4>
+                    <p>Transport • 14 Jan 2026</p>
+                </div>
+                <div class="transaction-amount expense">-65.00 €</div>
+                <div class="transaction-actions">
+                    <div class="action-icon edit">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="action-icon delete">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transaction-item">
+                <div class="category-icon icon-md" style="background-color: #16A34A15;">
+                    <i class="fas fa-money-bill-wave" style="color: #16A34A;"></i>
+                </div>
+                <div class="transaction-details">
+                    <h4>Salaire Janvier</h4>
+                    <p>Salaire • 01 Jan 2026</p>
+                </div>
+                <div class="transaction-amount revenue">+2,500.00 €</div>
+                <div class="transaction-actions">
+                    <div class="action-icon edit">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="action-icon delete">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Badges -->
+        <div class="demo-section">
+            <h2 class="demo-title">
+                <i class="fas fa-bookmark"></i> Badges avec Icônes
+            </h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <span class="badge-with-icon badge-revenue">
+                    <i class="fas fa-arrow-up"></i>
+                    Revenu
+                </span>
+                <span class="badge-with-icon badge-expense">
+                    <i class="fas fa-arrow-down"></i>
+                    Dépense
+                </span>
+            </div>
+        </div>
+
+        <!-- Section 6: État Vide -->
+        <div class="demo-section">
+            <h2 class="demo-title">
+                <i class="fas fa-inbox"></i> État Vide
+            </h2>
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <h3 class="empty-state-title">Aucune transaction</h3>
+                <p class="empty-state-description">
+                    Vous n'avez pas encore ajouté de transaction. Commencez par ajouter votre première transaction.
+                </p>
+                <button class="action-icon add" style="width: auto; padding: 0.75rem 1.5rem; border-radius: 8px;">
+                    <i class="fas fa-plus"></i>
+                    <span style="margin-left: 0.5rem;">Ajouter une transaction</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section 7: Code Source -->
+        <div class="demo-section">
+            <h2 class="demo-title">
+                <i class="fas fa-code"></i> Code Source
+            </h2>
+            <p style="color: #6B7280; margin-bottom: 1rem;">
+                Pour utiliser ces icônes dans votre projet, ajoutez simplement Font Awesome dans le &lt;head&gt; de vos
+                pages HTML :
+            </p>
+            <pre
+                style="background: #1F2937; color: #F3F4F6; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"&gt;</code></pre>
+
+            <p style="color: #6B7280; margin: 1rem 0;">
+                Puis utilisez les classes Font Awesome :
+            </p>
+            <pre
+                style="background: #1F2937; color: #F3F4F6; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>&lt;i class="fas fa-shopping-cart" style="color: #16A34A;"&gt;&lt;/i&gt;</code></pre>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/icons.js"></script>
+    <script>
+        console.log('Icônes chargées avec succès!');
+        console.log('Configuration des catégories:', CATEGORY_CONFIG);
+    </script>
+</body>
+
+</html>

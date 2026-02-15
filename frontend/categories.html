@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Dépenses - Architecture des Catégories | Organisation d'Élite</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/logo-colors.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/empty-states.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <meta name="description"
+        content="Organisez vos finances avec une structure sur mesure. Créez vos propres indicateurs de succès financier avec Suivi Dépenses.">
+    <meta property="og:title" content="Suivi Dépenses - Organisation de Précision">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Adaptée -->
+        <aside class="sidebar" aria-label="Navigation principale">
+            <div class="sidebar-logo">
+                <img src="img/logo (1).jpg" alt="Suivi Dépenses" class="brand-logo-img" width="38" height="38"
+                    loading="eager">
+                <div class="sidebar-logo-text">Suivi Dépenses</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-link"><i class="fas fa-home"
+                        aria-hidden="true"></i><span>Tableau de Bord</span></a>
+                <a href="transactions.html" class="sidebar-nav-link"><i class="fas fa-exchange-alt"
+                        aria-hidden="true"></i><span>Transactions</span></a>
+                <a href="statistics.html" class="sidebar-nav-link"><i class="fas fa-chart-pie"
+                        aria-hidden="true"></i><span>Statistiques</span></a>
+                <a href="categories.html" class="sidebar-nav-link active"><i class="fas fa-th-large"
+                        aria-hidden="true"></i><span>Catégories</span></a>
+                <a href="settings.html" class="sidebar-nav-link"><i class="fas fa-cog"
+                        aria-hidden="true"></i><span>Paramètres</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-block">
+                    <div class="sidebar-footer-block-title"><i class="fas fa-shield-alt"
+                            style="color: var(--color-emerald);" aria-hidden="true"></i><span>Sécurité Active</span>
+                    </div>
+                    <p>Chiffrement AES-256 bits et audit de sécurité conforme RGPD.</p>
+                </div>
+                <button type="button" onclick="logout()" class="sidebar-btn-logout" aria-label="Se déconnecter"><i
+                        class="fas fa-sign-out-alt" aria-hidden="true"></i><span>Déconnexion</span></button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div class="page-title-box">
+                    <div class="page-title-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <h1 class="page-title">Mes Catégories</h1>
+                </div>
+                <div class="header-icons">
+                    <div
+                        style="background: rgba(0,0,0,0.03); padding: 0.5rem; border-radius: 10px; display: flex; gap: 1rem;">
+                        <i class="far fa-bell header-icon"></i>
+                        <i class="far fa-search header-icon"></i>
+                    </div>
+                    <div class="user-profile"
+                        style="padding: 0.25rem 0.5rem 0.25rem 1rem; background: white; border-radius: var(--radius-full); border: 1px solid var(--border-soft);">
+                        <img src="https://ui-avatars.com/api/?background=06B6D4&color=fff&name=U"
+                            class="user-avatar-img" id="userAvatarImg" style="width: 32px; height: 32px;">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-padding">
+                <div id="demoBannerContainer"></div>
+                <div class="card" role="region" aria-label="Gestion des catégories"
+                    style="padding: 0; overflow: hidden;">
+                    <div class="card-header" style="padding: 2.5rem 2.5rem 1.5rem 2.5rem;">
+                        <div>
+                            <h2 class="card-title">Gestion du Référentiel</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Personnalisez
+                                vos axes d'analyse financière</p>
+                        </div>
+                        <button class="btn-premium" onclick="openModal()"
+                            style="padding: 1rem 2rem; border-radius: 14px; box-shadow: var(--shadow-glow);">
+                            <i class="fas fa-plus-circle" style="font-size: 1.1rem;"></i>
+                            Nouvelle Catégorie
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table-premium">
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 2.5rem; width: 100px;">ICÔNE</th>
+                                    <th>NOM DE LA CATÉGORIE</th>
+                                    <th>IDENTIFIANT COULEUR</th>
+                                    <th style="padding-right: 2.5rem; text-align: right;">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoriesTable">
+                                <!-- JS content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Category -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle" class="card-title" style="margin-bottom: 2rem;">Nouvelle Catégorie</h2>
+            <form id="categoryForm">
+                <input type="hidden" id="categoryId">
+                <div class="form-group">
+                    <label class="form-label">Nom de la catégorie</label>
+                    <input type="text" id="catName" class="form-input" placeholder="Ex: Santé, Loisirs..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Couleur</label>
+                    <input type="color" id="catColor" class="form-input" style="height: 50px; padding: 5px;"
+                        value="#2563EB">
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2.5rem;">
+                    <button type="button" class="btn-premium"
+                        style="background: var(--bg-light); color: var(--text-dark);"
+                        onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn-premium"
+                        style="flex: 1; justify-content: center;">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/icons.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/demo-data.js"></script>
+    <script src="js/api-demo.js"></script>
+    <script src="js/init-demo.js"></script>
+    <script src="js/empty-state.js"></script>
+    <script>
+        checkAuth();
+
+        async function loadCategories() {
+            const request = (window.apiRequestWithDemo || apiRequest).bind(window);
+            try {
+                const categories = await request('/api/categories');
+                const tbody = document.getElementById('categoriesTable');
+
+                if (!categories || categories.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="empty-table-cell">
+                        <div class="empty-state">
+                            <div class="empty-state-illus"><div class="empty-state-img" style="width:100px;height:100px;margin:0 auto 1rem;border-radius:50%;background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(6,182,212,0.08));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#8B5CF6;"><i class="fas fa-th-large" aria-hidden="true"></i></div></div>
+                            <h3 class="empty-state-title">Aucune catégorie</h3>
+                            <p class="empty-state-text">Créez des catégories pour organiser vos transactions (Alimentation, Transport, Loisirs…).</p>
+                            <div class="empty-state-actions"><button type="button" class="btn-premium" onclick="openModal()">Créer une catégorie</button></div>
+                        </div></td></tr>`;
+                    if (window.renderDemoBanner) renderDemoBanner('demoBannerContainer');
+                    return;
+                }
+
+                tbody.innerHTML = categories.map((cat, index) => {
+                    const iconHtml = typeof getCategoryIcon === 'function'
+                        ? getCategoryIcon(cat.name, 'medium')
+                        : `<div style="width: 40px; height: 40px; border-radius: 12px; background: ${cat.color}15; color: ${cat.color}; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;"><i class="fas fa-folder"></i></div>`;
+
+                    return `
+                        <tr style="transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); opacity: 0; animation: fadeInUp 0.5s ease forwards; animation-delay: ${index * 60}ms;">
+                            <td style="padding-left: 2.5rem;">${iconHtml}</td>
+                            <td><div style="font-weight: 700; color: var(--text-dark); font-size: 1rem;">${cat.name}</div></td>
+                            <td>
+                                <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #F8FAFC; padding: 0.5rem 1rem; border-radius: 10px; border: 1px solid var(--border-soft);">
+                                    <div style="width: 14px; height: 14px; border-radius: 4px; background: ${cat.color}; box-shadow: 0 0 10px ${cat.color}33;"></div>
+                                    <span style="font-family: 'Outfit'; font-weight: 600; font-size: 0.85rem; color: var(--text-main); text-transform: uppercase;">${cat.color}</span>
+                                </div>
+                            </td>
+                            <td style="padding-right: 2.5rem; text-align: right;">
+                                <div style="display: flex; gap: 0.5rem; justify-content: flex-end; opacity: 0.7; transition: opacity 0.2s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.7'">
+                                    <button onclick="editCategory(${cat.id}, '${cat.name}', '${cat.color}')" class="action-btn edit-btn" style="width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border-soft); background: white; color: var(--primary-blue); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button onclick="deleteCategory(${cat.id})" class="action-btn delete-btn" style="width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border-soft); background: white; color: var(--expense-red); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
+                const user = getCurrentUser();
+                if (user) {
+                    const av = document.getElementById('userAvatarImg');
+                    if (av) av.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username)}&background=2563EB&color=fff`;
+                }
+                if (window.renderDemoBanner) renderDemoBanner('demoBannerContainer');
+            } catch (err) {
+                console.error(err);
+                // En cas d'erreur, charger les catégories de démo
+                try {
+                    if (window.DEMO_DATA) {
+                        const categories = await window.DEMO_DATA.getDemoCategories();
+                        const tbody = document.getElementById('categoriesTable');
+                        if (tbody && categories && categories.length > 0) {
+                            tbody.innerHTML = categories.map(cat => {
+                                const iconHtml = typeof getCategoryIcon === 'function'
+                                    ? getCategoryIcon(cat.name, 'medium')
+                                    : `<div style="width: 40px; height: 40px; border-radius: 12px; background: ${cat.color}15; color: ${cat.color}; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;"><i class="fas fa-folder"></i></div>`;
+                                return `
+                                    <tr style="transition: background 0.2s;">
+                                        <td style="padding-left: 2.5rem;">${iconHtml}</td>
+                                        <td><div style="font-weight: 700; color: var(--text-dark); font-size: 1rem;">${cat.name}</div></td>
+                                        <td>
+                                            <div style="display: inline-flex; align-items: center; gap: 0.75rem; background: #F8FAFC; padding: 0.5rem 1rem; border-radius: 10px; border: 1px solid var(--border-soft);">
+                                                <div style="width: 14px; height: 14px; border-radius: 4px; background: ${cat.color}; box-shadow: 0 0 10px ${cat.color}33;"></div>
+                                                <span style="font-family: 'Outfit'; font-weight: 600; font-size: 0.85rem; color: var(--text-main); text-transform: uppercase;">${cat.color}</span>
+                                            </div>
+                                        </td>
+                                        <td style="padding-right: 2.5rem; text-align: right;">
+                                            <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                                                <button onclick="editCategory(${cat.id}, '${cat.name}', '${cat.color}')" class="action-btn edit-btn" style="width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border-soft); background: white; color: var(--primary-blue); cursor: pointer; transition: all 0.2s;">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button onclick="deleteCategory(${cat.id})" class="action-btn delete-btn" style="width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border-soft); background: white; color: var(--expense-red); cursor: pointer; transition: all 0.2s;">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('');
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error loading demo categories:', e);
+                }
+                if (window.renderDemoBanner) renderDemoBanner('demoBannerContainer');
+            }
+        }
+
+        function openModal() {
+            document.getElementById('categoryModal').style.display = 'flex';
+            document.getElementById('modalTitle').textContent = 'Nouvelle Catégorie';
+            document.getElementById('categoryForm').reset();
+            document.getElementById('categoryId').value = '';
+        }
+
+        function closeModal() { document.getElementById('categoryModal').style.display = 'none'; }
+
+        window.editCategory = (id, name, color) => {
+            openModal();
+            document.getElementById('modalTitle').textContent = 'Modifier Catégorie';
+            document.getElementById('categoryId').value = id;
+            document.getElementById('catName').value = name;
+            document.getElementById('catColor').value = color;
+        };
+
+        window.deleteCategory = async (id) => {
+            if (confirm('Voulez-vous vraiment supprimer cette catégorie ?')) {
+                const req = request();
+                await req(`/api/categories/${id}`, 'DELETE');
+                loadCategories();
+                if (window.showToast) showToast('Catégorie supprimée', 'success');
+            }
+        };
+
+        document.getElementById('categoryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const req = request();
+            const id = document.getElementById('categoryId').value;
+            const data = {
+                name: document.getElementById('catName').value,
+                color: document.getElementById('catColor').value
+            };
+
+            try {
+                const result = id ? await req(`/api/categories/${id}`, 'PUT', data) : await req('/api/categories', 'POST', data);
+                closeModal();
+                loadCategories();
+                if (window.showToast) showToast(id ? 'Catégorie modifiée' : 'Catégorie créée', 'success');
+                // Si on est sur transactions, recharger les catégories du formulaire
+                if (window.reloadTransactionCategories) {
+                    setTimeout(() => window.reloadTransactionCategories(), 500);
+                }
+            } catch (err) {
+                if (window.showToast) showToast(err.message || 'Erreur', 'error');
+                else alert(err.message);
+            }
+        });
+
+        loadCategories();
+
+        // Recharger quand les données sont mises à jour
+        window.addEventListener('suivi-data-updated', () => {
+            setTimeout(() => loadCategories(), 500);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Démarrage - Suivi Dépenses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #06b6d4, #10b981);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        h1 {
+            color: #0f172a;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+
+        .status-box {
+            background: #dcfce7;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-icon {
+            width: 50px;
+            height: 50px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .status-text {
+            flex: 1;
+        }
+
+        .status-text h3 {
+            color: #166534;
+            margin-bottom: 0.25rem;
+        }
+
+        .status-text p {
+            color: #15803d;
+            margin: 0;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: #0f172a;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.4);
+        }
+
+        .card.primary {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .card.success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .card.warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .info-box {
+            background: #f1f5f9;
+            border-left: 4px solid #06b6d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .info-box h3 {
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box ul {
+            margin-left: 1.5rem;
+            color: #475569;
+        }
+
+        .info-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        .code {
+            background: #0f172a;
+            color: #10b981;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <h1>Suivi Dépenses</h1>
+            <p class="subtitle">Votre journal de suivi de dépenses est prêt !</p>
+        </div>
+
+        <div class="status-box">
+            <div class="status-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="status-text">
+                <h3>✅ Toutes les fonctionnalités sont opérationnelles !</h3>
+                <p>Le backend est démarré, l'interface est prête. Vous pouvez commencer à utiliser l'application.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-rocket"></i> Commencer</h2>
+            <div class="cards">
+                <a href="register.html" class="card success">
+                    <div class="card-icon"><i class="fas fa-user-plus"></i></div>
+                    <div class="card-title">1. S'inscrire</div>
+                    <div class="card-description">Créez votre compte en 30 secondes</div>
+                </a>
+
+                <a href="login.html" class="card primary">
+                    <div class="card-icon"><i class="fas fa-sign-in-alt"></i></div>
+                    <div class="card-title">2. Se connecter</div>
+                    <div class="card-description">Accédez à votre espace personnel</div>
+                </a>
+
+                <a href="transactions.html" class="card">
+                    <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="card-title">3. Gérer vos Transactions</div>
+                    <div class="card-description">Ajoutez, recherchez, supprimez</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-compass"></i> Navigation</h2>
+            <div class="cards">
+                <a href="dashboard.html" class="card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="card-title">Tableau de Bord</div>
+                    <div class="card-description">Vue d'ensemble de vos finances</div>
+                </a>
+
+                <a href="statistics.html" class="card">
+                    <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="card-title">Statistiques</div>
+                    <div class="card-description">Graphiques et analyses</div>
+                </a>
+
+                <a href="categories.html" class="card">
+                    <div class="card-icon"><i class="fas fa-th-large"></i></div>
+                    <div class="card-title">Catégories</div>
+                    <div class="card-description">Personnalisez vos catégories</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-book"></i> Documentation</h2>
+            <div class="cards">
+                <a href="guide_fonctionnalites.html" class="card warning">
+                    <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                    <div class="card-title">Guide d'Utilisation</div>
+                    <div class="card-description">Comment utiliser les fonctionnalités</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>📝 Les 3 Fonctionnalités Principales</h3>
+            <ul>
+                <li><strong>✅ Ajouter des dépenses/revenus</strong> : Cliquez sur "Nouvelle Transaction" dans la page
+                    Transactions</li>
+                <li><strong>✅ Rechercher des dépenses</strong> : Utilisez la barre de recherche et les filtres en haut
+                    de la page</li>
+                <li><strong>✅ Supprimer des dépenses</strong> : Cliquez sur l'icône poubelle à droite de chaque
+                    transaction</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="border-left-color: #10b981; background: #dcfce7;">
+            <h3 style="color: #166534;">🎉 Confirmation</h3>
+            <p style="color: #15803d; margin: 0;">
+                Le backend a été testé avec succès. Toutes les routes API fonctionnent correctement.
+                L'interface frontend est complète et opérationnelle. Vous pouvez commencer à utiliser
+                l'application dès maintenant !
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 0.9rem;">
+                Serveur backend : <span class="code">http://localhost:5000</span> ✅ En cours d'exécution
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

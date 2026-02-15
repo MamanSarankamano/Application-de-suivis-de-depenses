@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Dépenses - Tableau de Bord | Intelligence Financière</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/logo-colors.css">
+    <link rel="stylesheet" href="css/empty-states.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <meta name="description"
+        content="Gérez votre bureau financier avec Suivi Dépenses. Suivez vos transactions, analysez votre santé financière et anticipez votre avenir avec une précision d'élite.">
+    <meta name="keywords" content="finance, budget, gestion, épargne, maïtrisé, prestige">
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Suivi Dépenses - Contrôle Financier d'Elite">
+    <meta property="og:description" content="Une expérience de gestion financière de classe mondiale.">
+    <meta property="og:image" content="img/logo (1).jpg">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Based on Image -->
+        <aside class="sidebar" aria-label="Navigation principale">
+            <div class="sidebar-logo">
+                <img src="img/logo (1).jpg" alt="Suivi Dépenses" class="brand-logo-img" width="38" height="38"
+                    loading="eager">
+                <div class="sidebar-logo-text">Suivi Dépenses</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Tableau de Bord</span>
+                </a>
+                <a href="transactions.html" class="sidebar-nav-link">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="statistics.html" class="sidebar-nav-link">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Statistiques</span>
+                </a>
+                <a href="categories.html" class="sidebar-nav-link">
+                    <i class="fas fa-th-large"></i>
+                    <span>Catégories</span>
+                </a>
+                <a href="settings.html" class="sidebar-nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-block">
+                    <div class="sidebar-footer-block-title">
+                        <i class="fas fa-shield-alt" style="color: var(--color-emerald);" aria-hidden="true"></i>
+                        <span>Sécurité Active</span>
+                    </div>
+                    <p>Chiffrement AES-256 bits et audit de sécurité conforme RGPD.</p>
+                </div>
+                <button type="button" onclick="logout()" class="sidebar-btn-logout" aria-label="Se déconnecter">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                    <span>Déconnexion</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header with Breadcrumb Style -->
+            <header class="page-header">
+                <div class="page-title-box">
+                    <div class="page-title-icon">
+                        <i class="fas fa-th-large" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="page-title">Bonjour, <span id="userFirstName">...</span>!</h1>
+                        <p class="page-subtitle">Ravi de vous revoir sur votre espace sécurisé.</p>
+                    </div>
+                </div>
+                <div class="header-icons">
+                    <div class="header-badge">
+                        <i class="fas fa-shield-check" aria-hidden="true"></i>
+                        PROTÉGÉ
+                    </div>
+                    <div class="header-actions">
+                        <button type="button" class="header-icon" aria-label="Notifications"><i
+                                class="far fa-bell"></i></button>
+                        <button type="button" class="header-icon" aria-label="Rechercher"><i
+                                class="far fa-search"></i></button>
+                    </div>
+                    <div class="user-profile">
+                        <div id="userNameDisplay" class="user-name">Chargement...</div>
+                        <img src="https://ui-avatars.com/api/?name=User&background=06B6D4&color=fff"
+                            class="user-avatar-img" id="userAvatarImg" width="32" height="32" alt="">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-padding">
+                <div id="demoBannerContainer"></div>
+                <div class="tip-card">
+                    <div class="tip-card-icon"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
+                    <div class="tip-card-content">
+                        <h3>Conseil du jour</h3>
+                        <p id="tipOfTheDay">Établir un budget par catégorie vous aide à mieux maîtriser vos dépenses.
+                            Consultez l'onglet Catégories pour personnaliser les vôtres.</p>
+                    </div>
+                </div>
+                <!-- Welcome & Health Stats -->
+                <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem; margin-bottom: 3rem;">
+                    <!-- Quick Stats Grid (The original 3 cards but inside a box) -->
+                    <div class="stats-grid" role="region" aria-label="Statistiques rapides">
+                        <div class="stat-card-premium">
+                            <div class="stat-icon-circle balance-icon"><i class="fas fa-university"
+                                    aria-hidden="true"></i></div>
+                            <div class="stat-label">Solde Total</div>
+                            <div class="stat-value-large skeleton" id="balanceValue" aria-live="polite"></div>
+                            <div class="stat-footer positive">
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i> Données synchronisées
+                            </div>
+                        </div>
+                        <div class="stat-card-premium">
+                            <div class="stat-icon-circle income-icon"><i class="fas fa-arrow-down"
+                                    aria-hidden="true"></i></div>
+                            <div class="stat-label">Revenus (30j)</div>
+                            <div class="stat-value-large skeleton" id="incomeValue" aria-live="polite"></div>
+                            <div class="stat-footer positive">
+                                <i class="fas fa-arrow-up" aria-hidden="true"></i> Tendance positive
+                            </div>
+                        </div>
+                        <div class="stat-card-premium">
+                            <div class="stat-icon-circle expense-icon"><i class="fas fa-arrow-up"
+                                    aria-hidden="true"></i></div>
+                            <div class="stat-label">Dépenses (30j)</div>
+                            <div class="stat-value-large skeleton" id="expenseValue" aria-live="polite"></div>
+                            <div class="stat-footer">
+                                <i class="fas fa-history" aria-hidden="true"></i> Mise à jour à l'instant
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Health Score Card -->
+                    <div class="card health-card-bg">
+                        <div class="health-card-deco" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+                        <div class="health-card-inner">
+                            <div class="health-card-label">SANTÉ FINANCIÈRE</div>
+                            <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 2rem;">
+                                <span class="health-score-value" id="healthScoreValue">85</span>
+                                <span style="font-size: 1.25rem; opacity: 0.7;">/100</span>
+                            </div>
+                            <div class="health-score-bar-wrap">
+                                <div id="healthScoreBar" class="health-score-bar" style="width: 85%;"></div>
+                            </div>
+                            <div class="health-card-status">
+                                <i class="fas fa-check-circle" aria-hidden="true"></i> Statut: Excellent
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div style="display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 2rem; margin-bottom: 3rem;">
+                    <!-- Monthly Chart -->
+                    <div class="card" style="position: relative; overflow: visible;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                            <div>
+                                <h2 class="card-title">Performance Mensuelle</h2>
+                                <p class="card-subtitle">Vue d'ensemble de vos flux financiers</p>
+                            </div>
+                            <div id="monthlyChartLegend" style="display: flex; gap: 1rem;"></div>
+                        </div>
+                        <div style="height: 350px; position: relative;">
+                            <canvas id="monthlyChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Expense Split Chart -->
+                    <div class="card" style="position: relative; overflow: visible;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <h2 class="card-title">Répartition</h2>
+                            <p class="card-subtitle">Composition de vos dépenses</p>
+                        </div>
+                        <div style="height: 250px; position: relative; margin-bottom: 1.5rem;">
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                        <!-- Conteneur pour la légende vivante en Grille -->
+                        <div id="expenseChartLegend" class="custom-legend-grid"></div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="card" style="animation-delay: 0.2s;">
+                    <div class="card-header">
+                        <h2 class="card-title">Opérations Récentes</h2>
+                        <a href="transactions.html" class="btn-text">Voir tout <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="table-container">
+                        <table class="table-premium">
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 2.5rem;">DATE</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>CATÉGORIE</th>
+                                    <th>STATUT</th>
+                                    <th style="text-align: right; padding-right: 2.5rem;">MONTANT</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTable">
+                                <!-- JS content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <style>
+            .custom-legend-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: var(--text-dark);
+                opacity: 0;
+                /* Pour l'animation */
+                animation: fadeInScale 0.4s ease forwards;
+            }
+
+            .legend-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Responsive: 1 colonne sur petit écran */
+            @media (max-width: 1200px) {
+                .custom-legend-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+        <footer class="app-footer">
+            &copy; 2026 Suivi Dépenses - Gestion Financière Premium
+        </footer>
+    </div>
+    </main>
+    </div>
+
+    <script src="js/icons.js"></script>
+    <script src="js/currency.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/demo-data.js"></script>
+    <script src="js/api-demo.js"></script>
+    <script src="js/init-demo.js"></script>
+    <script src="js/empty-state.js"></script>
+    <script>
+        checkAuth();
+
+        const TIPS = [
+            "Établir un budget par catégorie vous aide à mieux maîtriser vos dépenses. Consultez l'onglet Catégories pour personnaliser les vôtres.",
+            "Consultez vos Statistiques chaque semaine pour repérer les postes qui dépassent et ajuster en douceur.",
+            "Enregistrez vos transactions dès que possible : une bonne habitude pour un suivi fiable.",
+            "La règle des 50/30/20 : 50% besoins, 30% envies, 20% épargne. Un repère simple pour équilibrer votre budget."
+        ];
+
+        let monthlyChart, expenseChart;
+
+        (function setTipOfTheDay() {
+            const el = document.getElementById('tipOfTheDay');
+            if (el) el.textContent = TIPS[new Date().getDate() % TIPS.length];
+        })();
+
+        async function loadDashboard() {
+            const request = (window.apiRequestWithDemo || apiRequest).bind(window);
+            try {
+                const summary = await request('/api/transactions/stats/summary');
+                const balanceEl = document.getElementById('balanceValue');
+                const incomeEl = document.getElementById('incomeValue');
+                const expenseEl = document.getElementById('expenseValue');
+
+                balanceEl.classList.remove('skeleton');
+                incomeEl.classList.remove('skeleton');
+                expenseEl.classList.remove('skeleton');
+
+                balanceEl.textContent = formatCurrency(summary.balance != null ? summary.balance : 0);
+                incomeEl.textContent = formatCurrency(summary.total_income != null ? summary.total_income : 0);
+                expenseEl.textContent = formatCurrency(summary.total_expense != null ? summary.total_expense : 0);
+
+                const monthlyStats = await request('/api/transactions/stats/monthly');
+                if (monthlyStats && monthlyStats.length) renderMonthlyChart(monthlyStats);
+
+                const categoryStats = await request('/api/transactions/stats/by-category');
+                if (categoryStats && categoryStats.length) renderExpenseChart(categoryStats);
+
+                const txRes = await request('/api/transactions?page=1&per_page=5');
+                const txList = (txRes && txRes.data) ? txRes.data : [];
+                renderRecentTransactions(txList);
+
+                const user = getCurrentUser();
+                if (user) {
+                    const nameEl = document.getElementById('userNameDisplay');
+                    const firstEl = document.getElementById('userFirstName');
+                    const avatarEl = document.getElementById('userAvatarImg');
+                    if (nameEl) nameEl.textContent = user.username;
+                    if (firstEl) firstEl.textContent = user.username;
+                    if (avatarEl) avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username)}&background=2563EB&color=fff`;
+                }
+
+                if (window.renderDemoBanner) renderDemoBanner('demoBannerContainer');
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                // En cas d'erreur, essayer quand même d'afficher les données de démo
+                try {
+                    if (window.DEMO_DATA) {
+                        const summary = await window.DEMO_DATA.getDemoSummary();
+                        const balanceEl = document.getElementById('balanceValue');
+                        const incomeEl = document.getElementById('incomeValue');
+                        const expenseEl = document.getElementById('expenseValue');
+                        if (balanceEl) {
+                            balanceEl.classList.remove('skeleton');
+                            balanceEl.textContent = formatCurrency(summary.balance || 0);
+                        }
+                        if (incomeEl) {
+                            incomeEl.classList.remove('skeleton');
+                            incomeEl.textContent = formatCurrency(summary.total_income || 0);
+                        }
+                        if (expenseEl) {
+                            expenseEl.classList.remove('skeleton');
+                            expenseEl.textContent = formatCurrency(summary.total_expense || 0);
+                        }
+                        const monthlyStats = await window.DEMO_DATA.getDemoMonthly();
+                        if (monthlyStats && monthlyStats.length) renderMonthlyChart(monthlyStats);
+                        const categoryStats = await window.DEMO_DATA.getDemoByCategory();
+                        if (categoryStats && categoryStats.length) renderExpenseChart(categoryStats);
+                        const txRes = await window.DEMO_DATA.getDemoTransactions(1, null, null, null);
+                        const txList = (txRes && txRes.data) ? txRes.data : [];
+                        renderRecentTransactions(txList);
+                    }
+                } catch (e) {
+                    console.error('Error loading demo data:', e);
+                }
+                if (window.renderDemoBanner) renderDemoBanner('demoBannerContainer');
+            }
+        }
+
+        function renderMonthlyChart(data) {
+            const ctx = document.getElementById('monthlyChart').getContext('2d');
+            if (monthlyChart) monthlyChart.destroy();
+
+            monthlyChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => d.month),
+                    datasets: [
+                        {
+                            label: 'Revenus',
+                            data: data.map(d => d.income),
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        },
+                        {
+                            label: 'Dépenses',
+                            data: data.map(d => d.expense),
+                            borderColor: '#F43F5E',
+                            backgroundColor: 'rgba(244, 63, 94, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'end',
+                            labels: {
+                                usePointStyle: true,
+                                boxWidth: 8,
+                                font: { family: 'Outfit', size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            titleFont: { family: 'Outfit', size: 13 },
+                            bodyFont: { family: 'Outfit', size: 12 },
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: context => ` ${context.dataset.label}: ${formatCurrency(context.parsed.y)}`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(148, 163, 184, 0.1)',
+                                borderDash: [4, 4]
+                            },
+                            ticks: {
+                                color: '#94A3B8',
+                                font: { family: 'Outfit', size: 11 },
+                                callback: value => formatCurrency(value, false),
+                                maxTicksLimit: 6
+                            },
+                            border: { display: false }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#94A3B8',
+                                font: { family: 'Outfit', size: 11 }
+                            },
+                            border: { display: false }
+                        }
+                    },
+                    layout: { padding: 10 }
+                }
+            });
+        }
+
+        function renderExpenseChart(data) {
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            if (expenseChart) expenseChart.destroy();
+
+            expenseChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.map(d => d.name),
+                    datasets: [{
+                        data: data.map(d => d.value),
+                        backgroundColor: data.map(d => d.color || '#B45309'),
+                        borderWidth: 2,
+                        borderColor: '#fff',
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: { family: 'Outfit', size: 11 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            titleFont: { family: 'Outfit', size: 13 },
+                            bodyFont: { family: 'Outfit', size: 12 },
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: context => ` ${context.label}: ${formatCurrency(context.parsed)}`
+                            }
+                        }
+                    },
+                    layout: { padding: 20 }
+                }
+            });
+        }
+
+        function renderRecentTransactions(transactions) {
+            const tbody = document.getElementById('transactionsTable');
+            if (!transactions || transactions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="empty-table-cell">
+                    <div class="empty-state">
+                        <div class="empty-state-illus"><div class="empty-state-img" style="width:100px;height:100px;margin:0 auto 1rem;border-radius:50%;background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(16,185,129,0.08));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--color-cyan);"><i class="fas fa-exchange-alt" aria-hidden="true"></i></div></div>
+                        <h3 class="empty-state-title">Aucune opération récente</h3>
+                        <p class="empty-state-text">Ajoutez votre première transaction pour voir votre activité ici.</p>
+                        <div class="empty-state-actions"><a href="transactions.html" class="btn-premium">Voir les transactions</a></div>
+                    </div></td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = transactions.map((t, index) => `
+                <tr style="transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); opacity: 0; animation: fadeInUp 0.5s ease forwards; animation-delay: ${index * 80}ms;">
+                    <td style="padding-left: 2.5rem;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">${new Date(t.date).toLocaleDateString('fr-FR')}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">ID: #${t.id.toString().padStart(6, '0')}</div>
+                    </td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 40px; height: 40px; border-radius: 12px; background: ${t.type === 'revenu' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(248, 250, 252, 1)'}; color: ${t.type === 'revenu' ? '#10B981' : '#64748B'}; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                                <i class="fas ${t.type === 'revenu' ? 'fa-arrow-down' : 'fa-shopping-cart'}"></i>
+                            </div>
+                            <div style="font-weight: 700; color: var(--text-dark);">${t.description || 'Virement Entrant'}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: #F8FAFC; padding: 0.4rem 0.8rem; border-radius: 8px; border: 1px solid var(--border-soft); transition: transform 0.2s;">
+                            <span style="width: 10px; height: 10px; border-radius: 3px; background: ${t.category_color}; box-shadow: 0 0 8px ${t.category_color}44;"></span>
+                            <span style="font-weight: 600; font-size: 0.8rem; color: var(--text-main);">${t.category}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <span class="badge ${t.type === 'revenu' ? 'badge-income' : 'badge-expense'}" style="padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.7rem; font-weight: 800; width: fit-content; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                                <i class="fas fa-check-circle" style="margin-right: 4px;"></i> ${t.type === 'revenu' ? 'COMPLÉTÉ' : 'DÉBITÉ'}
+                            </span>
+                        </div>
+                    </td>
+                    <td style="padding-right: 2.5rem; text-align: right; font-weight: 800; font-size: 1.15rem; ${t.type === 'revenu' ? 'color: var(--income-green);' : 'color: var(--text-dark);'}">
+                        ${t.type === 'revenu' ? '+' : ''}${formatCurrency(t.amount, false)} GNF
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        loadDashboard();
+
+        // Recharger les données quand on revient sur la page (après création/modification)
+        let lastFocus = Date.now();
+        window.addEventListener('focus', () => {
+            if (Date.now() - lastFocus > 2000) {
+                loadDashboard();
+            }
+            lastFocus = Date.now();
+        });
+
+        // Recharger quand les données sont mises à jour (événement personnalisé)
+        window.addEventListener('suivi-data-updated', () => {
+            setTimeout(() => loadDashboard(), 500);
+        });
+
+        // Recharger aussi via storage event (pour autres onglets)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'suivi_demo_transactions' || e.key === 'suivi_demo_categories') {
+                setTimeout(() => loadDashboard(), 300);
+            }
+        });
+    </script>
+</body>
+
+</html>

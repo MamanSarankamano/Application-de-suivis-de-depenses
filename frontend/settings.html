@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres - Suivi Dépenses</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/logo-colors.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/empty-states.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Elite -->
+        <aside class="sidebar" aria-label="Navigation principale">
+            <div class="sidebar-logo">
+                <img src="img/logo (1).jpg" alt="Suivi Dépenses" class="brand-logo-img" width="38" height="38" loading="eager">
+                <div class="sidebar-logo-text">Suivi Dépenses</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="sidebar-nav-link"><i class="fas fa-home" aria-hidden="true"></i><span>Tableau de Bord</span></a>
+                <a href="transactions.html" class="sidebar-nav-link"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span>Transactions</span></a>
+                <a href="statistics.html" class="sidebar-nav-link"><i class="fas fa-chart-pie" aria-hidden="true"></i><span>Statistiques</span></a>
+                <a href="categories.html" class="sidebar-nav-link"><i class="fas fa-th-large" aria-hidden="true"></i><span>Catégories</span></a>
+                <a href="settings.html" class="sidebar-nav-link active"><i class="fas fa-cog" aria-hidden="true"></i><span>Paramètres</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-block">
+                    <div class="sidebar-footer-block-title"><i class="fas fa-shield-alt" style="color: var(--color-emerald);" aria-hidden="true"></i><span>Sécurité Active</span></div>
+                    <p>Chiffrement AES-256 bits et audit de sécurité conforme RGPD.</p>
+                </div>
+                <button type="button" onclick="logout()" class="sidebar-btn-logout" aria-label="Se déconnecter"><i class="fas fa-sign-out-alt" aria-hidden="true"></i><span>Déconnexion</span></button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="page-header">
+                <div class="page-title-box">
+                    <div class="page-title-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h1 class="page-title">Centre de Sécurité</h1>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Gérez vos informations
+                            personnelles et vos accès.</p>
+                    </div>
+                </div>
+                <div class="header-icons">
+                    <div
+                        style="display: flex; align-items: center; gap: 0.75rem; background: #ECFDF5; color: #059669; padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.75rem; font-weight: 700; margin-right: 1.5rem;">
+                        <i class="fas fa-lock"></i>
+                        ACCÈS SÉCURISÉ
+                    </div>
+                    <div class="user-profile"
+                        style="padding: 0.25rem 0.5rem 0.25rem 1rem; background: white; border-radius: var(--radius-full); border: 1px solid var(--border-soft);">
+                        <div id="userNameDisplayHead"
+                            style="text-align: right; color: var(--text-dark); font-weight: 700; font-size: 0.85rem;">
+                            Chargement...</div>
+                        <img src="https://ui-avatars.com/api/?name=User&background=06B6D4&color=fff"
+                            class="user-avatar-img" id="userAvatarImg" style="width: 32px; height: 32px;">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-padding">
+                <div id="demoBannerContainer"></div>
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <!-- Profile Overview section -->
+                    <div class="card"
+                        style="background: var(--primary-gradient); color: white; border: none; overflow: visible;">
+                        <div style="display: flex; align-items: center; gap: 2.5rem;">
+                            <div style="position: relative;">
+                                <img id="profilePictureLarge"
+                                    src="https://ui-avatars.com/api/?name=User&background=fff&color=2563EB&size=128"
+                                    style="width: 100px; height: 100px; border-radius: 30px; border: 4px solid rgba(255,255,255,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+                                <div
+                                    style="position: absolute; bottom: -5px; right: -5px; background: #10B981; width: 28px; height: 28px; border-radius: 50%; border: 3px solid #2563EB; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 id="userFullDisplayName" style="font-size: 1.75rem; font-weight: 800; margin: 0;">
+                                    Chargement...</h2>
+                                <p id="userEmailDisplay" style="opacity: 0.8; margin-top: 5px; font-size: 1rem;">...</p>
+                                <div style="display: flex; gap: 1rem; margin-top: 1.25rem;">
+                                    <span
+                                        style="background: rgba(255,255,255,0.15); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.75rem; font-weight: 600;">Standard
+                                        Member</span>
+                                    <span
+                                        style="background: rgba(16, 185, 129, 0.2); color: #10B981; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700;">Compte
+                                        Vérifié</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <!-- Profile Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Informations</h2>
+                            </div>
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label class="form-label">Nom d'utilisateur</label>
+                                    <input type="text" id="username" class="form-input" required
+                                        style="border-radius: 12px; padding: 1rem;">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email Professionnel</label>
+                                    <input type="email" id="email" class="form-input" required
+                                        style="border-radius: 12px; padding: 1rem;">
+                                </div>
+                                <button type="submit" class="btn-premium"
+                                    style="width: 100%; justify-content: center; margin-top: 1rem;">
+                                    <i class="fas fa-save"></i> Mettre à jour
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Security Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Authentification</h2>
+                            </div>
+                            <form id="passwordForm">
+                                <div class="form-group">
+                                    <label class="form-label">Ancien mot de passe</label>
+                                    <input type="password" id="currentPassword" class="form-input" required
+                                        style="border-radius: 12px; padding: 1rem;">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nouveau mot de passe</label>
+                                    <input type="password" id="newPassword" class="form-input" required
+                                        style="border-radius: 12px; padding: 1rem;">
+                                </div>
+                                <button type="submit" class="btn-premium"
+                                    style="width: 100%; justify-content: center; margin-top: 1rem;">
+                                    <i class="fas fa-key"></i> Changer l'accès
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast"
+        style="display: none; position: fixed; bottom: 2rem; right: 2rem; background: var(--income-green); color: white; padding: 1rem 2rem; border-radius: 8px; box-shadow: var(--shadow-lg); font-weight: 700; z-index: 3000;">
+        Succès !
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/demo-data.js"></script>
+    <script src="js/api-demo.js"></script>
+    <script src="js/empty-state.js"></script>
+    <script>
+        checkAuth();
+        if (window.renderDemoBanner) setTimeout(() => renderDemoBanner('demoBannerContainer'), 100);
+
+        async function init() {
+            const user = getCurrentUser();
+            if (user) {
+                document.getElementById('username').value = user.username;
+                document.getElementById('email').value = user.email || '';
+
+                // Head and Dashboard Profile
+                document.getElementById('userNameDisplayHead').textContent = user.username;
+                document.getElementById('userFullDisplayName').textContent = user.username;
+                document.getElementById('userEmailDisplay').textContent = user.email || 'Membre Standard';
+
+                const avatarUrl = `https://ui-avatars.com/api/?name=${user.username}&background=2563EB&color=fff`;
+                document.getElementById('userAvatarImg').src = avatarUrl;
+                document.getElementById('profilePictureLarge').src = `https://ui-avatars.com/api/?name=${user.username}&background=fff&color=2563EB&size=128`;
+            }
+        }
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.background = isError ? 'var(--expense-red)' : 'var(--income-green)';
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value
+            };
+            try {
+                const response = await apiRequest('/api/auth/update-profile', 'PUT', data);
+                localStorage.setItem('user', JSON.stringify(response.user));
+                showToast('Profil mis à jour !');
+                init();
+            } catch (err) { showToast(err.message, true); }
+        });
+
+        document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                current_password: document.getElementById('currentPassword').value,
+                new_password: document.getElementById('newPassword').value
+            };
+            try {
+                await apiRequest('/api/auth/change-password', 'PUT', data);
+                showToast('Mot de passe changé !');
+                e.target.reset();
+            } catch (err) { showToast(err.message, true); }
+        });
+
+        init();
+    </script>
+</body>
+
+</html>
