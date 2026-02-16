@@ -77,10 +77,40 @@ Comment aider un utilisateur à :
 ## 4. Contraintes techniques
 
 ### 4.1 Technologies retenues
-🔹 **Backend :** Python 3, Flask (Blueprints), SQLAlchemy.
-🔹 **Base de données :** SQLite (Développement/Production locale).
-🔹 **Frontend :** HTML5, CSS3 (Custom Design System, Variables CSS, Glassmorphism), JavaScript (ES6+), Chart.js (customisée).
-🔹 **Outils :** VS Code, Git.
+
+#### Backend (API)
+- **Langage :** Python 3.8+
+- **Framework :** Flask (Architecture Blueprints)
+- **ORM & Base de données :**
+  - SQLAlchemy (Abstraction DB)
+  - Flask-Migrate (Migrations via Alembic)
+  - **SQLite** (Environnement de développement)
+  - **PostgreSQL** (Driver `psycopg2-binary` prêt pour production)
+- **Sécurité & Authentification :**
+  - **Flask-JWT-Extended** (Tokens JWT Access + Refresh)
+  - **Flask-Talisman** (Headers de sécurité HTTP/HTTPS)
+  - **Flask-Limiter** (Protection Rate Limiting)
+  - **Flask-Cors** (Gestion des origines croisées)
+  - **Werkzeug** (Hachage de mots de passe)
+- **Tests :** Pytest
+
+#### Frontend (Interface)
+- **Structure :** HTML5 Sémantique
+- **Style :**
+  - **CSS3 Natif** (Pas de Framework lourd type Bootstrap)
+  - **Custom Design System** (Variables CSS `:root`)
+  - **Glassmorphism** & Dégradés complexes
+- **Interactivité :** JavaScript Moderne (ES6+), Fetch API
+- **Librairies Externes (CDN) :**
+  - **Chart.js 4.x** (Graphiques interactifs)
+  - **FontAwesome 6.5** (Icônes vectorielles)
+  - **Google Fonts** (Typographie 'Outfit')
+  - **UI Avatars** (Génération d'avatars par défaut)
+
+#### Outils de Développement
+- **Gestion de version :** Git & GitHub
+- **IDE :** VS Code
+- **API Testing :** Postman / cURL
 
 ### 4.2 Contraintes
 - **Design Premium :** Interface "High-End", utilisation de dégradés, ombres portées, typographie moderne (Google Fonts: Outfit).
